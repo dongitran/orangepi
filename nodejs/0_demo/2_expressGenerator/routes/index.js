@@ -8,15 +8,41 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/',function(req,res){
-  cpuSpeedStr = '';
   si.cpu()
-	.then(data => {
-		console.log(data.speed); 
-		cpuSpeedStr = data.speed;
-		returnObj = {cpuSpeed: cpuSpeedStr};
-		console.log(returnObj);
-		res.send(returnObj);
-	})
+    .then(cpuData => {
+      //console.log(cpuData); 
+      cpuSpeed = cpuData.speed;
+      
+      si.cpuCurrentSpeed()
+        .then(currentSpeedData=>{
+          //console.log(currentSpeedData);
+          currentSpeed = currentSpeedData.avg;
+
+          si.mem()
+            .then(memData=>{
+              //console.log(memData);
+              memTotal = memData.total;
+              memFree = memData.free;
+
+              si.cpuTemperature()
+                .then(temperatureData=>{
+                  //console.log(temperatureData);
+                  returnObj = {
+                    cpuSpeed: cpuSpeed, 
+                    currentSpeed: currentSpeed,
+                    memTotal: memTotal,
+                    memFree: memFree,
+                    temperature: temperatureData.main
+                  };
+                  //console.log(returnObj);
+                  res.send(returnObj);
+                })
+                .catch(error => console.log(error));
+            })
+            .catch(error => console.log(error));
+        })
+        .catch(error => console.log(error));
+    })
 	.catch(error => console.log(error));
 });
 

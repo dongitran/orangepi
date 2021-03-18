@@ -3,14 +3,14 @@ var ModbusRTU = require("modbus-serial");
 var client = new ModbusRTU();
 
 // open connection to a serial port
-client.connectRTUBuffered("/dev/ttyUSB0", { baudRate: 115200 }, read);
+client.connectRTUBuffered("/dev/ttyUSB0", { baudRate: 115200 }, write);
 
 function write() {
     client.setID(1);
 
     // write the values 0, 0xffff to registers starting at address 5
     // on device number 1.
-    client.writeRegisters(5, [0 , 0xffff])
+    client.writeRegisters(32, [0xffff])
         .then(read);
 }
 

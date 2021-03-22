@@ -419,7 +419,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">AGV Control</h1>
+                        <h1 class="h3 mb-0 text-gray-800">MP3 List</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -434,7 +434,7 @@
                                     <div class="row">
                                         <div class="col-sm-8">
                                             <div class=""></div>
-                                            <form action="/upload" method="POST" enctype="multipart/form-data">
+                                            <form action="/control.html" method="POST" enctype="multipart/form-data">
                                                 <div class="form-group">
                                                     <label for="example-input-file">&nbsp;</label>
                                                     <input type="file" name="file" class="form-control-file border">
@@ -447,14 +447,39 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2" style="align-items: center; justify-content: center;">
-                                <input type="range" id="velocityRange" style="width: 100%;">
+
+                    </div>
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id='tbody'>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-circle btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -512,9 +537,64 @@
 
     <script>
         //const socket = io();
-        
+        var mp3Data = '';
+        counter = 0;
+        function appendRowOnTable(str, tbody){
+            //// Insert a row at the end of table
+            //let newRow = tbody.insertRow();
+            //// Insert a cell at the end of the row
+            //let newCell1 = newRow.insertCell();
+            //let newCell2 = newRow.insertCell();
+            ////newCell2.innerHTML = '<a onclick="deleteElement(' + str + ')" class="btn btn-primary btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
+            //newCell2.innerHTML = '<button onclick="deleteElement("' + str + '") class="btn btn-primary" type="button"><i class="fas fa-search fa-sm"></i></button>';
+            //
+            //// Append a text node to the cell
+            //let newText = document.createTextNode(str);
+            //newCell1.appendChild(newText);
+
+            tbodyObj = document.getElementById('tbody');
+
+            tbodyObj.innerHTML += '<tr><td>' + str + '</td><td><a ontouchstart="deleteElement(0)" id="btn' + counter + '" class="btn btn-primary btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>';
+            //document.getElementById('btn' + counter).addEventListener('click', ()=>deleteElement(counter));
+            //$('btn' + counter).on('click touchstart', function(){
+            //    deleteElement(counter);
+            //})
+            counter++;
+        }
+        function syncDataInit(){
+            $.ajax({
+                url:'/control/init',
+                type:'POST',
+                success:function(data){
+                    var tbodyRef = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+                    dataArr = data.split(',');
+
+                    mp3Data = dataArr;
+                    for(let i = 0; i < (dataArr.length-1); i++){
+                        appendRowOnTable(dataArr[i], tbodyRef);
+                    }
+                },
+                error:function(err){
+                    //alert(err);
+                }
+            });
+        }
+        function deleteElement(index){
+            datReturn = {name: mp3Data[index]}
+            $.ajax({
+                url:'/control/delete',
+                type:'POST',
+                data:datReturn,
+                success:function(data){
+                    
+                },
+                error:function(err){
+                    //alert(err);
+                }
+            });
+        }
         $(document).ready(function () {
-            
+            syncDataInit();
         })
     </script>
 

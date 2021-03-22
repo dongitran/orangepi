@@ -32,8 +32,8 @@ const server = http.createServer((req, res) => {
         console.log('rename');
       });
 
-      res.writeHead(200, { 'content-type': 'application/json' });
-      res.end(JSON.stringify({ fields, files }, null, 2));
+      res.writeHead(204);
+      res.end();
     });
  
     return;

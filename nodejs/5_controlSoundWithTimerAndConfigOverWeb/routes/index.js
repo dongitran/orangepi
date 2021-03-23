@@ -3,10 +3,50 @@ var express = require('express');
 var router = express.Router();
 var mv = require('mv');
 var fs = require('fs');
+var si = require('systeminformation');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+router.post('/',function(req,res){
+  si.cpu()
+    .then(cpuData => {
+      //console.log(cpuData); 
+      cpuSpeed = cpuData.speed;
+      
+      si.cpuCurrentSpeed()
+        .then(currentSpeedData=>{
+          //console.log(currentSpeedData);
+          currentSpeed = currentSpeedData.avg;
+
+          si.mem()
+            .then(memData=>{
+              //console.log(memData);
+              memTotal = memData.total;
+              memFree = memData.free;
+
+              si.cpuTemperature()
+                .then(temperatureData=>{
+                  //console.log(temperatureData);
+                  returnObj = {
+                    cpuSpeed: cpuSpeed, 
+                    currentSpeed: currentSpeed,
+                    memTotal: memTotal,
+                    memFree: memFree,
+                    temperature: temperatureData.main
+                  };
+                  //console.log(returnObj);
+                  res.send(returnObj);
+                })
+                .catch(error => console.log(error));
+            })
+            .catch(error => console.log(error));
+        })
+        .catch(error => console.log(error));
+    })
+	.catch(error => console.log(error));
 });
 
 router.post('/control.html',function(req,res){
@@ -27,7 +67,7 @@ router.post('/control.html',function(req,res){
 router.post('/control/init',function(req,res){
   //console.log(req);
   var arr = '';
-  fs.readdir('/home/idea/git/nodejs/5_controlSoundWithTimerAndConfigOverWeb/uploads', (err, files) => {
+  fs.readdir('./uploads', (err, files) => {
     //files.forEach(file => {
     //  arr = arr + file + ',';
     //  console.log(file);

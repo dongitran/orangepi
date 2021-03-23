@@ -21,10 +21,10 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 // This line is from the Node.js HTTPS documentation.
-var options = {
-  key: fs.readFileSync('/home/idea/git/nodejs/3_httpsServer/bin/key.pem'),
-  cert: fs.readFileSync('/home/idea/git/nodejs/3_httpsServer/bin/cert.pem')
-};
+//var options = {
+//  key: fs.readFileSync('/home/idea/git/nodejs/3_httpsServer/bin/key.pem'),
+//  cert: fs.readFileSync('/home/idea/git/nodejs/3_httpsServer/bin/cert.pem')
+//};
 
 /**
  * Create HTTPs server.

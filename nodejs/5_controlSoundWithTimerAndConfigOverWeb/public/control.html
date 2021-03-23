@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Agv Control</title>
+    <title>Sound System - IDEA</title>
 
     <style type="text/css">
         body {
@@ -79,7 +79,7 @@
 
 </head>
 
-<body id="page-top" class="noscroll">
+<body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -100,112 +100,28 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
             <!-- Nav Item - Control -->
             <li class="nav-item active">
                 <a class="nav-link" href="control.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-wrench"></i>
                     <span>Control</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Control -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
+                    <span>Info</span></a>
             </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -419,7 +335,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">MP3 List</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Sound Config</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -434,10 +350,10 @@
                                     <div class="row">
                                         <div class="col-sm-8">
                                             <div class=""></div>
-                                            <form action="/control.html" method="POST" enctype="multipart/form-data">
+                                            <form id="addFileForm" action="/control.html" method="POST" enctype="multipart/form-data">
                                                 <div class="form-group">
-                                                    <label for="example-input-file">&nbsp;</label>
-                                                    <input type="file" name="file" class="form-control-file border">
+                                                    <label id="labelFileAdd"for="example-input-file">&nbsp;</label>
+                                                    <input id="nameFileAdd" type="file" name="file" class="form-control-file border">
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </form>
@@ -447,19 +363,16 @@
                             </div>
                         </div>
 
-
                     </div>
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Mp3 List</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" pageLength="4">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
@@ -467,14 +380,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id='tbody'>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -485,6 +391,16 @@
 
             </div>
             <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright IDEA Group</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->
 
@@ -540,21 +456,7 @@
         var mp3Data = '';
         counter = 0;
         function appendRowOnTable(str, tbody){
-            //// Insert a row at the end of table
-            //let newRow = tbody.insertRow();
-            //// Insert a cell at the end of the row
-            //let newCell1 = newRow.insertCell();
-            //let newCell2 = newRow.insertCell();
-            ////newCell2.innerHTML = '<a onclick="deleteElement(' + str + ')" class="btn btn-primary btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
-            //newCell2.innerHTML = '<button onclick="deleteElement("' + str + '") class="btn btn-primary" type="button"><i class="fas fa-search fa-sm"></i></button>';
-            //
-            //// Append a text node to the cell
-            //let newText = document.createTextNode(str);
-            //newCell1.appendChild(newText);
-
-            tbodyObj = document.getElementById('tbody');
-
-            tbodyObj.innerHTML += '<tr><td>' + str + '</td><td><a ontouchstart="deleteElement(0)" id="btn' + counter + '" class="btn btn-primary btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>';
+            tbody.innerHTML += '<tr><td>' + str + '</td><td><a ontouchstart="deleteElement(' + counter + ')" id="btn' + counter + '" class="btn btn-primary btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>';
             //document.getElementById('btn' + counter).addEventListener('click', ()=>deleteElement(counter));
             //$('btn' + counter).on('click touchstart', function(){
             //    deleteElement(counter);
@@ -566,18 +468,31 @@
                 url:'/control/init',
                 type:'POST',
                 success:function(data){
-                    var tbodyRef = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+                    tbodyObj = document.getElementById('tbody');
                     dataArr = data.split(',');
 
                     mp3Data = dataArr;
                     for(let i = 0; i < (dataArr.length-1); i++){
-                        appendRowOnTable(dataArr[i], tbodyRef);
+                        appendRowOnTable(dataArr[i], tbodyObj);
                     }
+
+                    $("#sidebarToggleTop").trigger('click');
                 },
                 error:function(err){
                     //alert(err);
                 }
             });
+        }
+        function addFile(){
+            mp3Data.push(document.getElementById('labelFileAdd').textContent);
+            tbodyObj = document.getElementById('tbody');
+            tbodyObj.innerHTML = '';
+
+            counter = 0;
+
+            for(let i = 0; i < (mp3Data.length-1); i++){
+                appendRowOnTable(mp3Data[i], tbodyObj);
+            }
         }
         function deleteElement(index){
             datReturn = {name: mp3Data[index]}
@@ -586,7 +501,18 @@
                 type:'POST',
                 data:datReturn,
                 success:function(data){
-                    
+                    itemRm = mp3Data[index];
+                    let indexRm = mp3Data.indexOf(itemRm);
+                    mp3Data.splice(indexRm, 1);
+
+                    tbodyObj = document.getElementById('tbody');
+                    tbodyObj.innerHTML = '';
+
+                    counter = 0;
+
+                    for(let i = 0; i < (mp3Data.length-1); i++){
+                        appendRowOnTable(mp3Data[i], tbodyObj);
+                    }
                 },
                 error:function(err){
                     //alert(err);
@@ -595,6 +521,18 @@
         }
         $(document).ready(function () {
             syncDataInit();
+
+            //document.getElementById('addFile').addEventListener('click touchstart', addFile);
+            //$(document).on('submit', )
+            $("#addFileForm").on("submit", function(){
+                addFile();
+            });
+
+            $("#dataTable").DataTable({
+                "pageLength":4
+            });
+
+            $("#sidebarToggleTop").trigger('click');
         })
     </script>
 

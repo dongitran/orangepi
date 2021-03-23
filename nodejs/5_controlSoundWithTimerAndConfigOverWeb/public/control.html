@@ -472,8 +472,9 @@
                     dataArr = data.split(',');
 
                     mp3Data = dataArr;
-                    for(let i = 0; i < (dataArr.length-1); i++){
-                        appendRowOnTable(dataArr[i], tbodyObj);
+		    mp3Data.pop();
+                    for(let i = 0; i < (mp3Data.length); i++){
+                        appendRowOnTable(mp3Data[i], tbodyObj);
                     }
 
                     $("#sidebarToggleTop").trigger('click');
@@ -484,13 +485,16 @@
             });
         }
         function addFile(){
-            mp3Data.push(document.getElementById('labelFileAdd').textContent);
+            fileAdding = '' + document.getElementById('nameFileAdd').value;
+            console.log(fileAdding);
+	    arr = fileAdding.split('\\');
+            mp3Data.push(arr[arr.length - 1]);
             tbodyObj = document.getElementById('tbody');
             tbodyObj.innerHTML = '';
 
             counter = 0;
 
-            for(let i = 0; i < (mp3Data.length-1); i++){
+            for(let i = 0; i < (mp3Data.length); i++){
                 appendRowOnTable(mp3Data[i], tbodyObj);
             }
         }
@@ -510,7 +514,7 @@
 
                     counter = 0;
 
-                    for(let i = 0; i < (mp3Data.length-1); i++){
+                    for(let i = 0; i < (mp3Data.length); i++){
                         appendRowOnTable(mp3Data[i], tbodyObj);
                     }
                 },

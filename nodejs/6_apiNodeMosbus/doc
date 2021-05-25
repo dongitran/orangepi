@@ -1,0 +1,22 @@
+[00] - Có api hay ko(1 - có, 0 - không)
+[01] - Id api cần xử lý
+[02] - Dữ liệu gửi 0
+[03] - Dữ liệu gửi 1
+[04] - Dữ liệu gửi 2
+[05] - Dữ liệu gửi 3
+[06] - Dữ liệu gửi 4
+[07] - Dữ liệu gửi 5
+[08] - Dữ liệu gửi 6
+[09] - Dữ liệu gửi 7
+[10] - Api đã xử lý xong chưa
+[11] - Dữ liệu nhận 0
+[12] - Dữ liệu nhận 1
+[13] - Dữ liệu nhận 2
+[14] - Dữ liệu nhận 3
+[15] - Dữ liệu nhận 4
+[16] - Dữ liệu nhận 5
+[17] - Dữ liệu nhận 6
+[18] - Dữ liệu nhận 7
+[19] - Lỗi api(0 - Not yet, 1 - Timeout, 2 - Error check data)
+
+

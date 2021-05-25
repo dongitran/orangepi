@@ -1,0 +1,10 @@
+{"level":"info","message":"hello"}
+{"level":"info","message":"hello"}
+{ level: 'info',
+  message: 'What time is the testing at?',
+  label: 'right meow!',
+  timestamp: '2021-05-25T03:21:16.842Z' }
+{ level: 'error',
+  message: 'What time is the testing at?',
+  label: 'right meow!',
+  timestamp: '2021-05-25T03:23:05.773Z' }

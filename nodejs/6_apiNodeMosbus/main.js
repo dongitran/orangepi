@@ -6,20 +6,24 @@ var vsprintf = require('sprintf-js').vsprintf;
 var ModbusRTU = require("modbus-serial");
 var client = new ModbusRTU();
 const { createLogger, format, transports } = require('winston');
-const { combine, timestamp, label, prettyPrint } = format;
+const { combine, timestamp, label, printf } = format;
+const logFormat = printf(({ level, message, timestamp }) => {
+  return `${timestamp} - ${level}: ${message}`;
+});
 const logger = createLogger({
   format: combine(
+    label({ label: 'right meow!' }),
     timestamp(),
-    prettyPrint()
+    logFormat
   ),
   transports: [
     new transports.Console(),
     new transports.File({ filename: 'combined.log' })
   ]
-})
+});
 
 // Config file
-config = '{"api":[{"id":0,"type":"post","server":"dweet.io","serverType":"https","port":443,"url":"/dweet/quietly/for/agvStatus","contentType":"json","contentLength":1,"content":"{\\\"status\\\":%d}"},{"id":1,"type":"get","server":"dweet.io","serverType":"https","port":443,"url":"/get/latest/dweet/for/agvControl","contentType":"json","content":"{\\\"this\\\":\\\"succeeded\\\",\\\"by\\\":\\\"getting\\\",\\\"the\\\":\\\"dweets\\\",\\\"with\\\":[{\\\"thing\\\":\\\"agvControl\\\",\\\"created\\\":\\\"#\\\",\\\"content\\\":{\\\"status\\\":@}}]}"}]}';
+config = '{"api":[{"id":0,"type":"post","server":"dweet.io","serverType":"https","port":443,"url":"/dweet/quietly/for/agvStatus","contentType":"json","contentLength":1,"content":"{\\\"status\\\":%d}"},{"id":1,"type":"get","server":"dweet.io","serverType":"https","port":443,"url":"/get/latest/dweet/for/agvControl","contentType":"json","content":"{\\\"this\\\":\\\"succeeded\\\",\\\"by\\\":\\\"getting\\\",\\\"the\\\":\\\"dweets\\\",\\\"with\\\":[{\\\"thing\\\":\\\"agvControl\\\",\\\"created\\\":\\\"#\\\",\\\"content\\\":{\\\"status\\\":@,\\\"control\\\":@}}]}"}]}';
 // Parse json config file
 var configObj = JSON.parse(config);
 

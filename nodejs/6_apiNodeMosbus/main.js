@@ -24,9 +24,10 @@ const logger = createLogger({
 });
 
 // Config file
-config = '{"api":[{"id":0,"type":"post","server":"dweet.io","serverType":"https","port":443,"url":"/dweet/quietly/for/agvStatus","contentType":"json","contentLength":1,"content":"{\\\"status\\\":%d}"},{"id":1,"type":"get","server":"dweet.io","serverType":"https","port":443,"url":"/get/latest/dweet/for/agvControl","contentType":"json","content":"{\\\"this\\\":\\\"succeeded\\\",\\\"by\\\":\\\"getting\\\",\\\"the\\\":\\\"dweets\\\",\\\"with\\\":[{\\\"thing\\\":\\\"agvControl\\\",\\\"created\\\":\\\"#\\\",\\\"content\\\":{\\\"status\\\":@,\\\"control\\\":@}}]}"}]}';
+//config = '{"api":[{"id":0,"type":"post","server":"dweet.io","serverType":"https","port":443,"url":"/dweet/quietly/for/agvStatus","contentType":"json","contentLength":1,"content":"{\\\"status\\\":%d}"},{"id":1,"type":"get","server":"dweet.io","serverType":"https","port":443,"url":"/get/latest/dweet/for/agvControl","contentType":"json","content":"{\\\"this\\\":\\\"succeeded\\\",\\\"by\\\":\\\"getting\\\",\\\"the\\\":\\\"dweets\\\",\\\"with\\\":[{\\\"thing\\\":\\\"agvControl\\\",\\\"created\\\":\\\"#\\\",\\\"content\\\":{\\\"status\\\":@,\\\"control\\\":@}}]}"}]}';
+var config = '';
 // Parse json config file
-var configObj = JSON.parse(config);
+var configObj;
 
 
 // open connection to a serial port
@@ -77,7 +78,10 @@ function CheckApiRequest(){  // Read
             
               console.log(statusCode);
   
-              if(body != 200){
+              if(body == 200){
+                
+              }
+              else{
                 // Upgrade only request api
                 //setTimeout(CheckApiRequest, 10);
   
@@ -127,10 +131,7 @@ function CheckApiRequest(){  // Read
               else{
                 // Check format data receive correct
                 let dataReceived = response.body;
-                console.log('dataReceived: ' + dataReceived);
-                
                 let dataFormat = configObj.api[indexApi].content;
-                console.log('dataFormat: ' + dataFormat);
                 // Transfer data received to format data
                 let indexFormat = 0, lengthDataFormat = dataFormat.length;
                 let indexReceived = 0, lengthDataReceived = dataReceived.length;
@@ -265,80 +266,6 @@ function CheckApiRequest(){  // Read
             }
           })();
         }
-        /*
-          if(configObj.api[indexApi].type == 'post'){
-            options = {
-              hostname: configObj.api[indexApi].server,
-              port: configObj.api[indexApi].port,
-              path: configObj.api[indexApi].url,
-              header:{
-                'Content-Type': 'application/json',
-                'Content-Length': strSend.length
-              },
-              method:'POST',
-              timeout: 3000,
-            };
-          }
-          else{
-            options = {
-              hostname: configObj.api[indexApi].server,
-              port: configObj.api[indexApi].port,
-              path: configObj.api[indexApi].url,
-              method:'GET',
-              timeout: 3000,
-            };
-          }
-          let req, http_https;
-          if(configObj.api[indexApi].serverType == 'http'){
-            http_https = http;
-          }
-          else{
-            http_https = https;
-          }
-          try{
-            req = http_https.request(options, res=>{
-              console.log('status: ' + res.statusCode);
-              if(configObj.api[indexApi].type == 'post'){
-                console.log('Process after get');
-                client.writeRegisters(10, [1])
-                      .then(value=>{
-                        setTimeout(CheckApiRequest, 10);
-                        console.log(value);
-                      })
-                      .catch((e)=>{
-                        console.log(e.message);
-                        setTimeout(CheckApiRequest, 10);
-                      });
-              }
-              res.on('data', d=>{
-                console.log('Data ' + d);
-    
-                if(configObj.api[indexApi].type == 'get'){
-                  
-                }
-              })
-            });
-    
-            req.on('error', error=>{
-              console.log(error);
-            });
-            if(configObj.api[indexApi].type == 'post')
-              req.write(strSend);
-            req.end();
-          }
-          catch(e){
-            console.log('Error6: Request https crash');
-            logger.log({
-              level: 'error',
-              message: 'Error 6 - Request https crash'
-            });
-            logger.log({
-              level: 'error',
-              message: e.message
-            });
-            setTimeout(CheckApiRequest, 10);
-          }
-        */
       }
       else{
         setTimeout(CheckApiRequest, 10);
@@ -350,5 +277,191 @@ function CheckApiRequest(){  // Read
       setTimeout(CheckApiRequest, 10);
     });
 }
-setTimeout(CheckApiRequest, 10);
+
+// Step:  0 - Send start sync -> Wait start sync ok
+//        1 - Send request length config data -> Waiting length config data
+//        2 - Send request data -> Waiting data reponse
+//        3 - Send finish sync -> Waiting finish sync ok
+//
+var syncStep = 0, lengthConfigStr, lengthRemainGetConfigStr, blockRequestGetConfigStr;
+var errSync = 0;
+function SyncConfigData(){
+  switch(syncStep){
+    case 0:{    //  Send start sync -> Wait start sync ok
+      client.writeRegisters(10, [11])
+      .then(value=>{
+        client.readHoldingRegisters(0, 1)
+        .then(valueRead=>{
+          if(valueRead.data[0] == 11){
+            syncStep++;
+
+            setTimeout(SyncConfigData, 10);
+          }
+          else{
+            logger.log({
+              level: 'error',
+              message: "Mcu not accept start sync"
+            });
+
+            setTimeout(SyncConfigData, 10);
+          }
+        })
+        .catch((e)=>{
+          logger.log({
+            level: 'error',
+            message: 'Error 11.0 - ' + e.message
+          });
+
+          setTimeout(SyncConfigData, 10);
+        });
+      })
+      .catch((e)=>{
+        logger.log({
+          level: 'error',
+          message: 'Error 11.1 - ' + e.message
+        });
+        
+        setTimeout(SyncConfigData, 10);
+      });
+      break;
+    }
+    case 1:{    //  Send request length config data -> Waiting length config data
+      client.writeRegisters(10, [12])
+      .then(value=>{
+        client.readHoldingRegisters(0, 2)
+        .then(valueRead=>{
+          if(valueRead.data[0] == 12){
+            lengthConfigStr = valueRead.data[1];
+            lengthRemainGetConfigStr = lengthConfigStr;
+            blockRequestGetConfigStr = 0;
+            syncStep++;
+
+            setTimeout(SyncConfigData, 10);
+          }
+          else{
+            logger.log({
+              level: 'error',
+              message: "Mcu not accept get length config data"
+            });
+
+            setTimeout(SyncConfigData, 10);
+          }
+        })
+        .catch((e)=>{
+          logger.log({
+            level: 'error',
+            message: 'Error 12.0 - ' + e.message
+          });
+
+          setTimeout(SyncConfigData, 10);
+        });
+      })
+      .catch((e)=>{
+        logger.log({
+          level: 'error',
+          message: 'Error 12.1 - ' + e.message
+        });
+
+        setTimeout(SyncConfigData, 10);
+      });
+      break;
+    }
+    case 2:{    //  Send request data -> Waiting data reponse
+      let lengthCharacterRequest;
+      if(lengthRemainGetConfigStr >= 16){
+        lengthCharacterRequest = 16;
+      }
+      else{
+        lengthCharacterRequest = lengthRemainGetConfigStr;
+      }
+      lengthRemainGetConfigStr -= lengthCharacterRequest;
+      blockRequestGetConfigStr++;
+
+      client.writeRegisters(10, [13, blockRequestGetConfigStr])
+      .then(value=>{
+        client.readHoldingRegisters(0, 10)
+        .then(valueRead=>{
+          if((valueRead.data[0] == 13)&&(valueRead.data[1] == blockRequestGetConfigStr)){
+            lengthConfigStr = valueRead.data[1];
+            
+            // Get config data
+            let counterRegister = 0;
+            counterRegister = Math.floor(lengthCharacterRequest/2);
+            if(lengthCharacterRequest%2 > 0){
+              counterRegister++;
+            }
+
+            for(let i = 0; i < counterRegister; i++){
+              config += String.fromCharCode(valueRead.data[2 + i]%256);
+              config += String.fromCharCode(Math.floor(valueRead.data[2 + i]/256));
+            }
+
+            // Check data is remain?
+            if(lengthRemainGetConfigStr == 0){
+              configObj = JSON.parse(config);
+              console.log(configObj);
+              syncStep++;
+            }
+            setTimeout(SyncConfigData, 10);
+          }
+          else{
+            logger.log({
+              level: 'error',
+              message: "Mcu not accept get config data"
+            });
+            //errSync = 1;
+            blockRequestGetConfigStr--;
+            lengthRemainGetConfigStr += lengthCharacterRequest;
+
+            setTimeout(SyncConfigData, 10);
+          }
+        })
+        .catch((e)=>{
+          logger.log({
+            level: 'error',
+            message: "Error 1: " + e
+          });
+          blockRequestGetConfigStr--;
+          lengthRemainGetConfigStr += lengthCharacterRequest;
+
+          setTimeout(SyncConfigData, 10);
+        });
+      })
+      .catch((e)=>{
+        logger.log({
+          level: 'error',
+          message: "Error 2: " + e
+        });
+        blockRequestGetConfigStr--;
+        lengthRemainGetConfigStr += lengthCharacterRequest;
+
+        setTimeout(SyncConfigData, 10);
+      });
+      break;
+    }
+    case 3:{    //  Send finish sync -> Waiting finish sync ok
+      client.writeRegisters(10, [14])
+      .then(value=>{
+        syncStep++;
+        setTimeout(SyncConfigData, 10);
+      })
+      .catch((e)=>{
+        logger.log({
+          level: 'error',
+          message: "Error 4: " + e
+        });
+        setTimeout(SyncConfigData, 10);
+      });
+      break;
+    }
+    case 4:{    
+      setTimeout(CheckApiRequest, 10);
+      errSync = 1;
+      break;
+    }
+  }
+}
+
+//setTimeout(CheckApiRequest, 10);
+setTimeout(SyncConfigData, 1000);
 

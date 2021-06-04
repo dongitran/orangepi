@@ -23,25 +23,32 @@ const logger = createLogger({
 function PollServer(){
   (async () => {
     try {
-      const response = await got('http://192.168.0.163');
+      const options={
+        timeout: 400,
+        retry:0
+      }
+      const response = await got('http://192.168.0.107:80', options);
 
-      logger.log({
-        level: 'info',
-        message: 'Received - statusCode: ' + response.statusCode + ' - body: ' + response.body
-      });
+      //logger.log({
+      //  level: 'info',
+      //  message: 'Received - statusCode: ' + response.statusCode + ' - body: ' + response.body
+      //});
 
       if(response.statusCode != 200){
         // Upgrade only request api
-        setTimeout(PollServer, 300);
-
+        setTimeout(PollServer, 200);
+        logger.log({
+          level: 'warning',
+          message: 'StatusCode: ' + response.statusCode
+        });
         
       }
       else{
-        
+        setTimeout(PollServer, 200);
       }
       //=> '<!doctype html> ...'
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       logger.log({
         level: 'error',
         message: error.message

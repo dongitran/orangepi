@@ -1,0 +1,218 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('7-pollAndCheckServerEsp32:server');
+var http = require('http');
+var https = require('https');
+var fs = require('fs');
+const got = require('got');
+// create an empty modbus client
+//var ModbusRTU = require("modbus-serial");
+//var client = new ModbusRTU();
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+// This line is from the Node.js HTTPS documentation.
+//var options = {
+//  key: fs.readFileSync('/home/idea/git/nodejs/3_httpsServer/bin/key.pem'),
+//  cert: fs.readFileSync('/home/idea/git/nodejs/3_httpsServer/bin/cert.pem')
+//};
+
+/**
+ * Create HTTPs server.
+ */
+var server = http.createServer(app);
+//var server = https.createServer(options, app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+
+const io = require('socket.io')(server);
+
+io.on('connection', function(socket) {
+  console.log('A user connected');
+
+  //socket.send("Hello!!");
+
+  //Whenever someone disconnects this piece of code executed
+  socket.on('disconnect', function () {
+     console.log('A user disconnected');
+  });
+
+  socket.on('message', (msg)=>{
+    returnObj = {
+      counterCheck: counterCheck,
+      counterReceive: counterReceive,
+    };
+    socket.send(JSON.stringify(returnObj));
+  });
+});
+
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, label, printf } = format;
+const logFormat = printf(({ level, message, timestamp }) => {
+  return `${timestamp} - ${level}: ${message}`;
+});
+const logger = createLogger({
+  format: combine(
+    label({ label: 'right meow!' }),
+    timestamp(),
+    logFormat
+  ),
+  transports: [
+    new transports.Console(),
+    new transports.File({ filename: 'combined.log' })
+  ]
+});
+var isFirstPollServer = true;
+var counterCheck = 0, counterReceive = 0, isHigh = false;
+function PollServer(){
+  (async () => {
+    try {
+      const options={
+        timeout: 400,
+        retry:0
+      }
+      const response = await got('http://192.168.0.107:80', options);
+
+      //logger.log({
+      //  level: 'info',
+      //  message: 'Received - statusCode: ' + response.statusCode + ' - body: ' + response.body
+      //});
+      
+
+      if(response.statusCode != 200){
+        // Upgrade only request api
+        setTimeout(PollServer, 200);
+
+        
+      }
+      else{
+        //console.log(response.body);
+        let strArr = response.body.split(',');
+
+        if(isFirstPollServer){
+          isFirstPollServer = false;
+          
+          counterCheck = parseInt(strArr[1]);
+          counterReceive = counterCheck;
+          if(parseInt(strArr[0]) == 1){
+            isHigh = true;
+          }
+          logger.log({
+            level: 'info',
+            message: 'First Poll - Counter: ' + counterCheck
+          });
+        }
+        else{
+          if(parseInt(strArr[0]) == 1){
+            if(isHigh == false){
+              isHigh = true;
+              counterCheck++;
+            }
+          }
+          else{
+            isHigh = false;
+          }
+
+          counterReceive = parseInt(strArr[1]);
+
+          logger.log({
+            level: 'info',
+            message: 'Poll:' + response.body + '-CounterCheck:' + counterCheck + '-CounterReceive:' + counterReceive
+          });
+        }
+        //console.log('Counter Check: ' + counterCheck);
+        //console.log('Counter Receive: ' + counterReceive);
+
+        setTimeout(PollServer, 100);
+      }
+      //=> '<!doctype html> ...'
+    } catch (error) {
+      console.log(error);
+      logger.log({
+        level: 'error',
+        message: error.message
+      });
+
+      setTimeout(PollServer, 300);
+    }
+  })();
+}
+
+PollServer();

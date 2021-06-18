@@ -379,45 +379,9 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"
-        integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
     <script>
-        function sendTest(){
-            $.ajax({
-                url:'/',
-                type:'POST',
-                success:function(data){
-                    //alert(data.cpuSpeed);
-                    document.getElementById('counterCheck').innerText = data.counterCheck;
-                    document.getElementById('counterReceive').innerText = data.counterReceive;
-                    setTimeout(sendTest, 1000);
-                },
-                error:function(err){
-                    //alert(err);
-                }
-            });
-        }
-        const socket = io();
-        socket.on('message', function(msg){
-            let obj = JSON.parse(msg);
-            document.getElementById('counterCheck').innerText = obj.counterCheck;
-            document.getElementById('counterReceive').innerText = obj.counterReceive;
-        });
-        var counter = 0;
-        function sendSocket(){
-            // Send data through socket.io
-            counter++;
-            console.log('Send');
-            let dat = {message:0};
-            socket.send(JSON.stringify(dat));
-            
-            setTimeout(sendSocket, 1000);
-        }
         $(document).ready(function(){
-            //sendTest();
-            setTimeout(sendSocket, 1000);
             
-            $("#sidebarToggleTop").trigger('click');
         })
     </script>
 

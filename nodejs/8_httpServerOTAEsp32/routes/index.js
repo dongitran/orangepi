@@ -53,9 +53,13 @@ router.get('/getFirmware', function(req, res, next) {
   });
 });
 
-router.post('/getVersion', function(req, res, next) {
+router.post('/getVersion', async function(req, res, next) {
   //Error
-  res.send(JSON.parse(JSON.stringify(GetVersionJson("esp32DevKit"))));
+  let a = await GetVersionJson("esp32DevKit");
+  console.log('a: ' + a);
+  let result = JSON.parse(JSON.stringify(a));
+  console.log('Return /getVersion');
+  res.send(result);
 });
 
 router.post("/uploadFirmware", upload.array("files"), uploadFiles);

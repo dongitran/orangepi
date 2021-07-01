@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html translate="no">
 
 <head>
 
@@ -48,7 +48,7 @@
                     <span>Dashboard</span></a>
             </li>
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Control -->
             <li class="nav-item" id="firmware" style="cursor: pointer;">
@@ -115,53 +115,22 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        <li id="markRead" class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
+                                <i id='bellAlert' class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span id="counterAlerts" class="badge badge-danger badge-counter"></span>
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div id="dropdownAlerts" style="max-height:40vh; overflow: auto" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Alerts Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                
+                                <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> -->
+                                
                             </div>
                         </li>
 
@@ -171,7 +140,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                <!-- <span class="badge badge-danger badge-counter">7</span> -->
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -179,52 +148,7 @@
                                 <h6 class="dropdown-header">
                                     Message Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
+                                
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
                         </li>
@@ -336,63 +260,160 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <script>
-        var contentRowDashboardStr = '', contentRowFirmware = '';
+        var contentRowDashboardStr = '', contentRowFirmware = '', contentAlerts = '';
         var tab = 0;    // dashboard page 
-        var versionCurrent = '';
+        var allFirmware = null;
+        function ResetMarkNoRead(){
+            $.ajax({
+                url:'/resetMarkNoRead',
+                type:'GET',
+                success:function(data){
+                    document.getElementById('counterAlerts').innerText = '';
+                },
+                error:function(err){
+                    //alert(err);
+                }
+            });
+        }
+        function RenderDashboardPage(data){
+            for(let i = 0; i < data.AllDevices.length; i++){
+                contentRowDashboardStr += '<div class="col-xl-4 col-md-6 mb-4"><div class="card border-left-';
+                if(data.AllDevices[i].status == "Running.."){
+                    contentRowDashboardStr += 'info';
+                }
+                else{
+                    contentRowDashboardStr += 'warning';
+                }
+                contentRowDashboardStr += ' shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><div class="col mr-2"><div class="h5 font-weight-bold text-primary text-uppercase mb-1">' + data.AllDevices[i].id + '</div><div id="counterCheck" class="text-xs mb-0 font-weight-bold text-gray-800">Name: ' + data.AllDevices[i].type + '</div><div id="counterCheck" class="text-xs mb-0 font-weight-bold text-gray-800">Version: ' + data.AllDevices[i].version + '</div><div id="counterCheck" class="text-xs mb-0 font-weight-bold text-gray-800">Status: ' + data.AllDevices[i].status + '</div></div><div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div></div></div></div></div>';
+            }
+            for(let i = (data.AllLogs.length - 1); i > 0; i--){
+                let dateTime = new Date(data.AllLogs[i].b).toUTCString();
+                let dateTimeSub = dateTime.substring(5, 25);
+
+                contentAlerts += '<a class="dropdown-item d-flex align-items-center" href="#"><div class="mr-3"><div class="icon-circle '
+                let contentStr = data.AllLogs[i].c.substring(0, 14);
+                if(contentStr == "update version"){
+                    contentAlerts += 'bg-primary"><i class="fas fa-file-alt';
+                }
+                else if(contentStr == "connect.."){
+                    contentAlerts += 'bg-success"><i class="fas fa-laugh-wink';
+                }
+                else if(contentStr == "disconnect!"){
+                    contentAlerts += 'bg-danger"><i class="fas fa-angry';
+                }
+                contentAlerts +=' text-white"></i></div></div><div><div class="small text-gray-500">' + dateTimeSub + '</div><span class="font-weight-bold">' + data.AllLogs[i].a + ' ' + data.AllLogs[i].c + '</span></div></a>';
+            }
+            
+            document.getElementById('contentRow').innerHTML = contentRowDashboardStr;
+            document.getElementById('dropdownAlerts').innerHTML = contentAlerts;
+            if(data.MarkNoRead > 0){
+                document.getElementById('counterAlerts').innerText = data.MarkNoRead;
+            }
+            else{
+                document.getElementById('counterAlerts').innerText = '';
+            }
+        }
         function SetDashboardPage(){
             if(tab == 0) return;
             tab = 0;
             document.getElementById('contentRow').innerHTML = contentRowDashboardStr;
             document.getElementById('dashboard').classList.add('active');
             document.getElementById('firmware').classList.remove('active');
+
+            document.getElementById('alertsDropdown').addEventListener('click', ResetMarkNoRead);
+
+            $.ajax({
+                url:'/',
+                type:'POST',
+                success:function(data){
+                    contentRowDashboardStr = "";
+                    contentAlerts = "";
+                    console.log(data);
+                    RenderDashboardPage(data);
+                },
+                error:function(err){
+                    //alert(err);
+                }
+            });
         }
         function SetFirmwarePage(){
             if(tab == 1) return;
             tab = 1;
-            document.getElementById('contentRow').innerHTML = '<div class="col-xl-5 col-md-6 mb-4"><div class="card border-left-warning shadow h-200 py-2"><div class="card-body"><div id="versionCurrentTab" class="row no-gutters align-items-center" style="height: 20vh;"><div class="col mr-2"><div id="versionCurrent" class="h5 font-weight-bold text-primary text-uppercase mb-1">Version current: </div><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Date update: 11/05/2021</div></div><div class="col-auto"><i class="fas fa-microchip fa-2x text-gray-300"></i></div></div></div></div></div><div class="col-xl-7 col-md-6 mb-4"><div class="card border-left-primary shadow h-200 py-2"><div class="card-body"><div id="updateNewFirmwareTab" class="row no-gutters align-items-center" style="min-height: 20vh;"><div class="col"><form id="formSubmit"><div class="form-group row" style="justify-content: center;"><div class="h5 font-weight-bold text-primary text-uppercase mb-1">Update New Firmware</div></div><div class="form-group row"><label for="versionInput" class="col-sm-5 col-form-label">New version</label><div class="col-sm-7"><input type="text" class="form-control" id="versionInput" placeholder="1.2"></div></div><div class="form-group row"><label for="firmwareInput" class="col-sm-5 col-form-label">Bin file</label><div class="col-sm-7"><div class="custom-file"><input type="file" class="custom-file-input" id="firmwareFile" required><label class="custom-file-label" id="firmwareFileLabel">Choose file...</label><div class="invalid-feedback">Example invalid custom file feedback</div></div></div></div><div class="form-group row" style="justify-content: center;"><button class="btn btn-primary" style="width: 50%;" type="submit">Upload..</button></div></form></div></div></div></div></div>';
+            document.getElementById('contentRow').innerHTML = '<div class="col-xl-5 col-md-6 mb-4"><div class="card border-left-primary shadow h-200 py-2"><div class="card-body"><div id="totalFirmwareTab" class="row no-gutters align-items-center" style="height: 20vh;"><div class="col mr-2"><div id="allFirmware" class="h5 font-weight-bold text-primary text-uppercase mb-1">Firmware Count: </div><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Date update: 11/05/2021</div></div><div class="col-auto"><i class="fas fa-microchip fa-2x text-gray-300"></i></div></div></div></div></div><div class="col-xl-7 col-md-6 mb-4"><div class="card border-left-primary shadow h-200 py-2"><div class="card-body"><div id="updateNewFirmwareTab" class="row no-gutters align-items-center" style="min-height: 20vh;"><div class="col"><form id="formSubmit"><div class="form-group row" style="justify-content: center;"><div class="h5 font-weight-bold text-primary text-uppercase mb-1">Update New Firmware</div></div><div class="form-group row"><label for="versionInput" class="col-sm-5 col-form-label">New version</label><div class="col-sm-7"><input type="text" class="form-control" id="versionInput" placeholder="1.2"></div></div><div class="form-group row"><label for="deviceTypeInput" class="col-sm-5 col-form-label">Device Type</label><div class="col-sm-7"><input type="text" class="form-control" id="deviceTypeInput" placeholder=""></div></div><div class="form-group row"><label for="firmwareInput" class="col-sm-5 col-form-label">Bin file</label><div class="col-sm-7"><div class="custom-file"><input type="file" class="custom-file-input" id="firmwareFile" required><label class="custom-file-label" id="firmwareFileLabel">Choose file...</label><div class="invalid-feedback">Example invalid custom file feedback</div></div></div></div><div class="form-group row" style="justify-content: center;"><button class="btn btn-primary" style="width: 50%;" type="submit">Upload..</button></div></form></div></div></div></div></div>';
             document.getElementById('dashboard').classList.remove('active');
             document.getElementById('firmware').classList.add('active');
 
-            document.getElementById("versionCurrentTab").setAttribute("style","height:" + document.getElementById("updateNewFirmwareTab").offsetHeight + "px");
+            document.getElementById("totalFirmwareTab").setAttribute("style","height:" + document.getElementById("updateNewFirmwareTab").offsetHeight + "px");
 
-            document.getElementById("formSubmit").addEventListener("submit", UploadFirmware);
 
-            $('#firmwareFile').on('change',function(){
-                //console.log("firmwareFile change");
-                //get the file name
-                //var fileName = $(this).val();
-                //replace the "Choose a file" label
-                //$(this).next('.firmwareFileLabel').html(fileName);
-                let fileNameLink = document.getElementById("firmwareFile").value.split("\\");
-                let fileName = fileNameLink[fileNameLink.length - 1];
-                document.getElementById("firmwareFileLabel").innerText = fileName;
-            })
-
-            if(versionCurrent == ''){
-                let dat = {deviceName:"esp32DevKit"};
+            if(allFirmware == null){
+                let dat = {status:"ok"};
                 $.ajax({
-                    url:'/getVersion',
+                    url:'/getAllFirmware',
                     type:'POST',
                     dataType:'json',
                     data:JSON.stringify(dat),
                     success:function(data){
                         //alert(data.cpuSpeed);
                         console.log(data);
-                        document.getElementById("versionCurrent").innerText += (' ' + data.version);
+                        document.getElementById("allFirmware").innerText += (' ' + data.length);
+                        allFirmware = data;
+
+                        for(let i = 0; i < allFirmware.length; i++){
+                            document.getElementById("contentRow").innerHTML += '<div class="col-xl-4 col-md-6 mb-4"><div class="card border-left-success shadow h-200 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><div class="col mr-2"><div class="h5 font-weight-bold text-primary text-uppercase mb-1">' + allFirmware[i].deviceName + '</div><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">' + allFirmware[i].version + '</div></div><div class="col-auto"><i class="fas fa-microchip fa-2x text-gray-300"></i></div></div></div></div></div>';
+                        }
+
+                        $('#firmwareFile').on('change',function(){
+                            //console.log("firmwareFile change");
+                            //get the file name
+                            //var fileName = $(this).val();
+                            //replace the "Choose a file" label
+                            //$(this).next('.firmwareFileLabel').html(fileName);
+                            let fileNameLink = document.getElementById("firmwareFile").value.split("\\");
+                            let fileName = fileNameLink[fileNameLink.length - 1];
+                            document.getElementById("firmwareFileLabel").innerText = fileName;
+                        });
+
+                        document.getElementById("formSubmit").addEventListener("submit", UploadFirmware);
                     },
                     error:function(err){
                         //alert(err);
                     }
                 });
             }
+            else{
+                document.getElementById("allFirmware").innerText = 'Firmware Count: ' + allFirmware.length;
+
+                for(let i = 0; i < allFirmware.length; i++){
+                    document.getElementById("contentRow").innerHTML += '<div class="col-xl-4 col-md-6 mb-4"><div class="card border-left-success shadow h-200 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><div class="col mr-2"><div class="h5 font-weight-bold text-primary text-uppercase mb-1">' + allFirmware[i].deviceName + '</div><div class="text-xs font-weight-bold text-primary text-uppercase mb-1">' + allFirmware[i].version + '</div></div><div class="col-auto"><i class="fas fa-microchip fa-2x text-gray-300"></i></div></div></div></div></div>';
+                }
+
+                $('#firmwareFile').on('change',function(){
+                    //console.log("firmwareFile change");
+                    //get the file name
+                    //var fileName = $(this).val();
+                    //replace the "Choose a file" label
+                    //$(this).next('.firmwareFileLabel').html(fileName);
+                    let fileNameLink = document.getElementById("firmwareFile").value.split("\\");
+                    let fileName = fileNameLink[fileNameLink.length - 1];
+                    document.getElementById("firmwareFileLabel").innerText = fileName;
+                });
+
+                document.getElementById("formSubmit").addEventListener("submit", UploadFirmware);
+            }
         }
         function UploadFirmware(e){
+            console.log('UploadFirmware');
             e.preventDefault();
+            console.log('UploadFirmware');
             const versionNum = document.getElementById("versionInput");
+            const deviceType = document.getElementById("deviceTypeInput");
             const file = document.getElementById("firmwareFile");
+            let versionCurrent = versionNum.value;
 
             const formData = new FormData();
-            formData.append("version", versionNum.value);
+            formData.append("deviceName", deviceType.value);
+            formData.append("version", versionCurrent);
             for(let i = 0; i < file.files.length; i++){
                 formData.append("files", file.files[i]);
             }
@@ -402,6 +423,7 @@
             })
                 .then((res)=>{
                     console.log(res);
+                    alert("Upload Ok!");
                 })
                 .catch((err)=>{
                     console.warn(err);
@@ -412,12 +434,9 @@
                 url:'/',
                 type:'POST',
                 success:function(data){
-                    //alert(data.cpuSpeed);
                     console.log(data);
-                    for(let i = 0; i < data.length; i++){
-                        contentRowDashboardStr += '<div class="col-xl-4 col-md-6 mb-4"><div class="card border-left-primary shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><div class="col mr-2"><div class="h5 font-weight-bold text-primary text-uppercase mb-1">' + data[i].id + '</div><div id="counterCheck" class="text-xs mb-0 font-weight-bold text-gray-800">Version: ' + data[i].version + '</div><div id="counterCheck" class="text-xs mb-0 font-weight-bold text-gray-800">Status: ' + data[i].status + '</div></div><div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div></div></div></div></div>';
-                    }
-                    document.getElementById('contentRow').innerHTML = contentRowDashboardStr;
+                    RenderDashboardPage(data);
+                    document.getElementById('alertsDropdown').addEventListener('click', ResetMarkNoRead);
                 },
                 error:function(err){
                     //alert(err);
@@ -431,3 +450,4 @@
 
 </body>
 </html>
+

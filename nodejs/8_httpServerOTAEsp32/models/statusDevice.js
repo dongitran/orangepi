@@ -1,8 +1,10 @@
 class StatusDevice{
-  constructor(id, version, status){
+  constructor(id, type, version, status, timeUpdate){
     this.id = id;
+    this.type = type;
     this.version = version;
     this.status = status;
+    this.timeUpdate = timeUpdate;
   }
   IsDevice(id){
     if(this.id != id){
@@ -16,6 +18,13 @@ class StatusDevice{
     }
     return false;
   }
+  IsOffline(time){
+    if((time - this.timeUpdate) > 20000){
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = StatusDevice;
+

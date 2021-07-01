@@ -10,7 +10,8 @@ var mqtt = require('mqtt');
 var client  = mqtt.connect('mqtt://172.16.120.128');
 var [return1, return2] = require('./store');
 const StatusDevice = require('./models/statusDevice');
-const [AddDevice, GetAllDevice, UpdateVersionDevice] = require('./deviceManager');
+const [AddDeviceAndCheckVersionAndTimeUpdate, GetAllDevice, UpdateVersionDevice, UpdateStatusDevice] = require('./deviceManager');
+const [GetAllFirmwareDevice, GetVersion, AddFirmwareDevice, UpdateVersionFirmwareDevice] = require('./firmwareManager');
 
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, printf } = format;
@@ -54,6 +55,8 @@ client.on('connect', function () {
       });
     }
   });
+
+  setTimeout(PublishVersionCurrent, 1000);
 });
 
 client.on('message', function (topic, message) {
@@ -62,10 +65,13 @@ client.on('message', function (topic, message) {
     //  level: 'info',
     //  message: 'Mqtt - New connect: ' + message
     //});
+    //console.log('mqtt device/status: ' + message);
     let messageStr = '' + message;
     let objRec = messageStr.split('-');
-    let device = new StatusDevice(objRec[0], objRec[1], objRec[2]);
-    if(AddDevice(device)){
+    let device = new StatusDevice(objRec[0], objRec[1], objRec[2], objRec[3], Date.now());
+    //console.log(Date.now());
+    //console.log(device);
+    if(AddDeviceAndCheckVersionAndTimeUpdate(device)){
       loggerMqtt.log({
         level: 'info',
         message: 'Mqtt - New device: ' + objRec[0]
@@ -73,6 +79,19 @@ client.on('message', function (topic, message) {
     }
   }
 });
+
+setInterval(UpdateStatusDevice, 3000);
+
+async function PublishVersionCurrent(){
+  let allDeviceFirmware = await GetAllFirmwareDevice();
+
+  for(let i = 0; i < allDeviceFirmware.length; i++){
+    client.publish('device/version_' + allDeviceFirmware[i].deviceName, '' + allDeviceFirmware[i].version);
+  }
+  
+
+  setTimeout(PublishVersionCurrent, 5000);
+}
 
 var app = express();
 
@@ -106,4 +125,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
 

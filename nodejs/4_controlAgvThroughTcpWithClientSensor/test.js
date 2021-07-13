@@ -13,7 +13,10 @@ client.connect(19204, '192.168.0.146', function() {
 
 client.on('data', function(data) {
 	console.log('Received: ' + data);
-	client.destroy(); // kill client after server's response
+	//client.destroy(); // kill client after server's response
+    let datSend = [0x5A,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x04,0x4C,0x04,0x4C,0x00,0x00,0x00,0x00];
+    let hexVal = new Uint8Array(datSend);
+    client.write(hexVal);
 });
 
 client.on('close', function() {

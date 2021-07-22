@@ -31933,3 +31933,282 @@
 2021-06-18T06:07:48.478Z - error: Error: Error: ETIMEDOUT
 2021-06-18T06:07:50.087Z - error: Error: Error: ETIMEDOUT
 2021-06-18T06:07:51.697Z - error: Error: Error: ETIMEDOUT
+2021-07-21T13:47:21.645Z - info: First Poll - Counter: NaN
+2021-07-21T13:53:13.436Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T13:53:16.975Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T13:53:53.531Z - info: First Poll - Counter: 2
+2021-07-21T13:58:16.159Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T14:00:00.267Z - info: Poll:0,32
+-Check:32-Receive:32-Timeout:1
+2021-07-21T14:00:03.899Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T14:06:06.616Z - info: Poll:1,63
+-Check:63-Receive:63-Timeout:2
+2021-07-21T14:09:13.116Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T14:09:41.799Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T14:12:16.141Z - info: Poll:0,93
+-Check:93-Receive:93-Timeout:4
+2021-07-21T14:18:18.614Z - info: Poll:1,124
+-Check:124-Receive:124-Timeout:4
+2021-07-21T14:24:21.167Z - info: Poll:1,154
+-Check:154-Receive:154-Timeout:4
+2021-07-21T14:30:23.629Z - info: Poll:0,184
+-Check:184-Receive:184-Timeout:4
+2021-07-21T14:30:27.281Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T14:36:29.257Z - info: Poll:1,215
+-Check:215-Receive:215-Timeout:5
+2021-07-21T14:42:27.174Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T14:42:34.264Z - info: Poll:1,245
+-Check:245-Receive:245-Timeout:6
+2021-07-21T14:48:36.870Z - info: Poll:0,275
+-Check:275-Receive:275-Timeout:6
+2021-07-21T14:54:39.241Z - info: Poll:0,305
+-Check:305-Receive:305-Timeout:6
+2021-07-21T15:00:41.390Z - info: Poll:1,336
+-Check:336-Receive:336-Timeout:6
+2021-07-21T15:06:43.335Z - info: Poll:1,366
+-Check:366-Receive:366-Timeout:6
+2021-07-21T15:12:45.739Z - info: Poll:1,396
+-Check:396-Receive:396-Timeout:6
+2021-07-21T15:14:15.423Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T15:18:51.192Z - info: Poll:0,426
+-Check:426-Receive:426-Timeout:7
+2021-07-21T15:19:59.462Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T15:24:57.230Z - info: Poll:1,457
+-Check:457-Receive:457-Timeout:8
+2021-07-21T15:28:18.282Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T15:31:02.875Z - info: Poll:0,487
+-Check:487-Receive:487-Timeout:9
+2021-07-21T15:35:57.445Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T15:37:08.981Z - info: Poll:1,518
+-Check:518-Receive:518-Timeout:10
+2021-07-21T15:42:35.564Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T15:43:15.003Z - info: Poll:0,548
+-Check:548-Receive:548-Timeout:11
+2021-07-21T15:49:17.331Z - info: Poll:1,579
+-Check:579-Receive:579-Timeout:11
+2021-07-21T15:55:19.004Z - info: Poll:1,609
+-Check:609-Receive:609-Timeout:11
+2021-07-21T16:01:21.318Z - info: Poll:1,639
+-Check:639-Receive:639-Timeout:11
+2021-07-21T16:07:22.759Z - info: Poll:1,669
+-Check:669-Receive:669-Timeout:11
+2021-07-21T16:12:10.077Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T16:13:28.813Z - info: Poll:0,699
+-Check:699-Receive:699-Timeout:12
+2021-07-21T16:16:09.933Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T16:19:34.641Z - info: Poll:1,730
+-Check:730-Receive:730-Timeout:13
+2021-07-21T16:21:11.413Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T16:22:37.424Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T16:25:43.565Z - info: Poll:1,761
+-Check:761-Receive:761-Timeout:15
+2021-07-21T16:31:46.138Z - info: Poll:1,791
+-Check:791-Receive:791-Timeout:15
+2021-07-21T16:34:17.032Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T16:36:08.509Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T16:37:56.254Z - info: Poll:1,822
+-Check:821-Receive:822-Timeout:17
+2021-07-21T16:43:58.245Z - info: Poll:1,852
+-Check:851-Receive:852-Timeout:17
+2021-07-21T16:50:00.458Z - info: Poll:0,882
+-Check:881-Receive:882-Timeout:17
+2021-07-21T16:52:16.793Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T16:56:06.057Z - info: Poll:1,913
+-Check:912-Receive:913-Timeout:18
+2021-07-21T17:02:08.894Z - info: Poll:1,943
+-Check:942-Receive:943-Timeout:18
+2021-07-21T17:08:10.454Z - info: Poll:1,973
+-Check:972-Receive:973-Timeout:18
+2021-07-21T17:14:12.820Z - info: Poll:0,1003
+-Check:1002-Receive:1003-Timeout:18
+2021-07-21T17:20:15.079Z - info: Poll:0,1033
+-Check:1032-Receive:1033-Timeout:18
+2021-07-21T17:21:09.201Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T17:25:23.795Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T17:26:24.688Z - info: Poll:0,1064
+-Check:1063-Receive:1064-Timeout:20
+2021-07-21T17:32:26.348Z - info: Poll:0,1094
+-Check:1093-Receive:1094-Timeout:20
+2021-07-21T17:38:28.152Z - info: Poll:0,1124
+-Check:1123-Receive:1124-Timeout:20
+2021-07-21T17:44:29.497Z - info: Poll:1,1155
+-Check:1154-Receive:1155-Timeout:20
+2021-07-21T17:50:31.399Z - info: Poll:1,1185
+-Check:1184-Receive:1185-Timeout:20
+2021-07-21T17:56:32.916Z - info: Poll:1,1215
+-Check:1214-Receive:1215-Timeout:20
+2021-07-21T18:02:34.186Z - info: Poll:1,1245
+-Check:1244-Receive:1245-Timeout:20
+2021-07-21T18:08:36.100Z - info: Poll:0,1275
+-Check:1274-Receive:1275-Timeout:20
+2021-07-21T18:14:37.316Z - info: Poll:0,1305
+-Check:1304-Receive:1305-Timeout:20
+2021-07-21T18:17:22.156Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T18:20:42.755Z - info: Poll:1,1336
+-Check:1335-Receive:1336-Timeout:21
+2021-07-21T18:21:47.380Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T18:26:48.482Z - info: Poll:0,1366
+-Check:1365-Receive:1366-Timeout:22
+2021-07-21T18:27:10.048Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T18:32:54.547Z - info: Poll:1,1397
+-Check:1396-Receive:1397-Timeout:23
+2021-07-21T18:38:56.579Z - info: Poll:1,1427
+-Check:1426-Receive:1427-Timeout:23
+2021-07-21T18:44:58.837Z - info: Poll:1,1457
+-Check:1456-Receive:1457-Timeout:23
+2021-07-21T18:47:11.334Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T18:51:04.185Z - info: Poll:0,1487
+-Check:1486-Receive:1487-Timeout:24
+2021-07-21T18:54:46.612Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T18:55:18.932Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T18:57:13.433Z - info: Poll:0,1518
+-Check:1517-Receive:1518-Timeout:26
+2021-07-21T19:03:15.120Z - info: Poll:0,1548
+-Check:1547-Receive:1548-Timeout:26
+2021-07-21T19:09:17.470Z - info: Poll:1,1579
+-Check:1578-Receive:1579-Timeout:26
+2021-07-21T19:15:19.304Z - info: Poll:1,1609
+-Check:1608-Receive:1609-Timeout:26
+2021-07-21T19:21:21.074Z - info: Poll:1,1639
+-Check:1638-Receive:1639-Timeout:26
+2021-07-21T19:27:22.543Z - info: Poll:1,1669
+-Check:1668-Receive:1669-Timeout:26
+2021-07-21T19:33:24.202Z - info: Poll:0,1699
+-Check:1698-Receive:1699-Timeout:26
+2021-07-21T19:34:36.207Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T19:39:29.153Z - info: Poll:1,1730
+-Check:1729-Receive:1730-Timeout:27
+2021-07-21T19:45:30.920Z - info: Poll:1,1760
+-Check:1759-Receive:1760-Timeout:27
+2021-07-21T19:51:32.026Z - info: Poll:1,1790
+-Check:1789-Receive:1790-Timeout:27
+2021-07-21T19:57:33.967Z - info: Poll:1,1820
+-Check:1819-Receive:1820-Timeout:27
+2021-07-21T20:03:35.839Z - info: Poll:0,1850
+-Check:1849-Receive:1850-Timeout:27
+2021-07-21T20:09:37.174Z - info: Poll:0,1880
+-Check:1879-Receive:1880-Timeout:27
+2021-07-21T20:15:39.237Z - info: Poll:0,1910
+-Check:1909-Receive:1910-Timeout:27
+2021-07-21T20:19:10.861Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T20:21:44.872Z - info: Poll:1,1941
+-Check:1940-Receive:1941-Timeout:28
+2021-07-21T20:27:46.008Z - info: Poll:1,1971
+-Check:1970-Receive:1971-Timeout:28
+2021-07-21T20:33:47.427Z - info: Poll:0,2001
+-Check:2000-Receive:2001-Timeout:28
+2021-07-21T20:38:05.284Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T20:39:52.450Z - info: Poll:0,2031
+-Check:2030-Receive:2031-Timeout:29
+2021-07-21T20:45:54.606Z - info: Poll:1,2062
+-Check:2061-Receive:2062-Timeout:29
+2021-07-21T20:51:56.588Z - info: Poll:1,2092
+-Check:2091-Receive:2092-Timeout:29
+2021-07-21T20:57:57.641Z - info: Poll:1,2122
+-Check:2121-Receive:2122-Timeout:29
+2021-07-21T21:03:58.129Z - info: Poll:1,2152
+-Check:2151-Receive:2152-Timeout:29
+2021-07-21T21:09:59.157Z - info: Poll:0,2182
+-Check:2181-Receive:2182-Timeout:29
+2021-07-21T21:16:00.498Z - info: Poll:0,2212
+-Check:2211-Receive:2212-Timeout:29
+2021-07-21T21:22:01.424Z - info: Poll:0,2242
+-Check:2241-Receive:2242-Timeout:29
+2021-07-21T21:22:44.275Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T21:28:05.954Z - info: Poll:1,2273
+-Check:2271-Receive:2273-Timeout:30
+2021-07-21T21:34:07.362Z - info: Poll:1,2303
+-Check:2301-Receive:2303-Timeout:30
+2021-07-21T21:38:28.819Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T21:40:12.723Z - info: Poll:0,2333
+-Check:2331-Receive:2333-Timeout:31
+2021-07-21T21:43:11.410Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T21:46:17.216Z - info: Poll:1,2364
+-Check:2362-Receive:2364-Timeout:32
+2021-07-21T21:52:19.055Z - info: Poll:1,2394
+-Check:2392-Receive:2394-Timeout:32
+2021-07-21T21:58:20.582Z - info: Poll:1,2424
+-Check:2422-Receive:2424-Timeout:32
+2021-07-21T22:04:21.721Z - info: Poll:1,2454
+-Check:2452-Receive:2454-Timeout:32
+2021-07-21T22:10:23.111Z - info: Poll:0,2484
+-Check:2482-Receive:2484-Timeout:32
+2021-07-21T22:16:24.593Z - info: Poll:0,2514
+-Check:2512-Receive:2514-Timeout:32
+2021-07-21T22:22:26.220Z - info: Poll:0,2544
+-Check:2542-Receive:2544-Timeout:32
+2021-07-21T22:28:27.522Z - info: Poll:0,2574
+-Check:2572-Receive:2574-Timeout:32
+2021-07-21T22:34:28.985Z - info: Poll:0,2604
+-Check:2602-Receive:2604-Timeout:32
+2021-07-21T22:40:30.118Z - info: Poll:1,2635
+-Check:2633-Receive:2635-Timeout:32
+2021-07-21T22:46:31.641Z - info: Poll:1,2665
+-Check:2663-Receive:2665-Timeout:32
+2021-07-21T22:52:32.716Z - info: Poll:1,2695
+-Check:2693-Receive:2695-Timeout:32
+2021-07-21T22:58:33.750Z - info: Poll:1,2725
+-Check:2723-Receive:2725-Timeout:32
+2021-07-21T23:01:14.569Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T23:04:38.353Z - info: Poll:0,2755
+-Check:2752-Receive:2755-Timeout:33
+2021-07-21T23:05:57.331Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-21T23:10:44.282Z - info: Poll:1,2786
+-Check:2783-Receive:2786-Timeout:34
+2021-07-21T23:16:46.244Z - info: Poll:1,2816
+-Check:2813-Receive:2816-Timeout:34
+2021-07-21T23:22:48.408Z - info: Poll:0,2846
+-Check:2843-Receive:2846-Timeout:34
+2021-07-21T23:28:51.303Z - info: Poll:0,2876
+-Check:2873-Receive:2876-Timeout:34
+2021-07-21T23:29:03.177Z - info: First Poll - Counter: 2877
+2021-07-21T23:30:52.825Z - info: Mqtt - connect broker done!
+2021-07-21T23:30:55.874Z - info: First Poll - Counter: 2887
+2021-07-21T23:36:57.640Z - info: Poll:1,2917
+-Check:2917-Receive:2917-Timeout:0
+2021-07-21T23:41:22.601Z - info: Mqtt - connect broker done!
+2021-07-21T23:41:25.612Z - info: First Poll - Counter: 2939
+2021-07-21T23:47:27.556Z - info: Poll:0,2969
+-Check:2969-Receive:2969-Timeout:0
+2021-07-21T23:53:29.414Z - info: Poll:1,3000
+-Check:3000-Receive:3000-Timeout:0
+2021-07-21T23:59:31.172Z - info: Poll:1,3030
+-Check:3030-Receive:3030-Timeout:0
+2021-07-22T00:05:32.929Z - info: Poll:1,3060
+-Check:3060-Receive:3060-Timeout:0
+2021-07-22T00:11:35.185Z - info: Poll:0,3090
+-Check:3090-Receive:3090-Timeout:0
+2021-07-22T00:14:52.549Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T00:17:40.839Z - info: Poll:0,3120
+-Check:3120-Receive:3120-Timeout:1
+2021-07-22T00:19:31.978Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T00:23:46.423Z - info: Poll:1,3151
+-Check:3150-Receive:3151-Timeout:2
+2021-07-22T00:29:17.280Z - info: Mqtt - connect broker done!
+2021-07-22T00:29:20.363Z - info: First Poll - Counter: 3179
+2021-07-22T00:35:03.311Z - info: Mqtt - connect broker done!
+2021-07-22T00:35:06.359Z - info: First Poll - Counter: 3208
+2021-07-22T00:39:31.340Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T00:39:45.812Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T00:41:15.364Z - info: Poll:0,3238
+-Check:3238-Receive:3238-Timeout:2
+2021-07-22T00:41:26.179Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T00:45:03.162Z - info: Mqtt - connect broker done!
+2021-07-22T00:45:06.255Z - info: First Poll - Counter: 3258
+2021-07-22T00:50:12.288Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T00:50:33.865Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T00:51:17.002Z - info: Poll:0,3288
+-Check:3288-Receive:3288-Timeout:2
+2021-07-22T00:51:53.144Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T00:57:26.206Z - info: Poll:0,3319
+-Check:3319-Receive:3319-Timeout:3
+2021-07-22T01:01:48.281Z - info: Mqtt - connect broker done!
+2021-07-22T01:01:51.388Z - info: First Poll - Counter: 3341
+2021-07-22T01:02:08.954Z - info: Mqtt - connect broker done!
+2021-07-22T01:02:11.985Z - info: First Poll - Counter: 3343
+2021-07-22T01:02:37.145Z - error: Error: Error: ESOCKETTIMEDOUT
+2021-07-22T01:08:17.682Z - info: Poll:1,3374
+-Check:3374-Receive:3374-Timeout:1
+2021-07-22T01:10:45.713Z - info: Mqtt - connect broker done!
+2021-07-22T01:10:48.720Z - info: First Poll - Counter: 3386
+2021-07-22T01:11:56.936Z - error: Error: Error: ESOCKETTIMEDOUT

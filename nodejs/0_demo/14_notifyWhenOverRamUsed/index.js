@@ -9,6 +9,8 @@ function CheckRamUsed(){
                 title: 'Hey!',
                 message: 'CPU Stress.......'
             });
+            setTimeout(CheckRamUsed, 8000);
+            return;
         }
         //console.log(data.active*100/data.total);
         setTimeout(CheckRamUsed, 3000);

@@ -23,8 +23,8 @@ app.set('port', port);
 
 // This line is from the Node.js HTTPS documentation.
 var options = {
-  key: fs.readFileSync('C:/Users/ITHC/AppData/Local/Code/orangepi/nodejs/3_httpsServer/bin/key.pem'),
-  cert: fs.readFileSync('C:/Users/ITHC/AppData/Local/Code/orangepi/nodejs/3_httpsServer/bin/cert.pem')
+  key: fs.readFileSync('/home/idea/Documents/Code/orangepi/nodejs/3_httpsServer/bin/key.pem'),
+  cert: fs.readFileSync('/home/idea/Documents/Code/orangepi/nodejs/3_httpsServer/bin/cert.pem')
 };
 
 /**

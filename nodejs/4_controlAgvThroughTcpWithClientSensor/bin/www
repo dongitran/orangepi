@@ -1,0 +1,258 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('4-controlagvthroughmodbuswithclientsensor:server');
+var http = require('http');
+var https = require('https');
+var fs = require('fs');
+var net = require('net');
+
+
+var isTcpInitDone = false;
+// create an empty modbus client
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '443');
+app.set('port', port);
+
+// This line is from the Node.js HTTPS documentation.
+var options = {
+  key: fs.readFileSync('/home/idea/Documents/Code/orangepi/nodejs/3_httpsServer/bin/key.pem'),
+  cert: fs.readFileSync('/home/idea/Documents/Code/orangepi/nodejs/3_httpsServer/bin/cert.pem')
+};
+
+/**
+ * Create HTTPs server.
+ */
+
+var server = https.createServer(options, app);
+
+
+// open connection to a serial port
+
+var intervalCheckTimeout = null;
+var isFirstReceived = true;
+var isDisconnectClient = false;
+var vx = 0;
+var w = 0;
+
+var isSending = false;
+// Socket io
+const io = require('socket.io')(server);
+//Whenever someone connects this gets executed
+io.on('connection', function(socket) {
+  console.log('A user connected');
+
+  //socket.send("Hello!!");
+
+  //Whenever someone disconnects this piece of code executed
+  socket.on('disconnect', function () {
+     console.log('A user disconnected');
+  });
+
+  
+  socket.on('message', (msg)=>{
+    //console.log('MR- ' + msg);
+
+    if(isFirstReceived){
+      isFirstReceived = false;
+
+      intervalCheckTimeout = setInterval(checkClientDisconnect, 400);
+      isDisconnectClient = false;
+    }
+    else{
+      if(isDisconnectClient){
+        clearInterval(intervalCheckTimeout);
+        intervalCheckTimeout = setInterval(checkClientDisconnect, 400);
+        isDisconnectClient = false;
+
+        vx = 0;
+        w = 0;
+      }
+      else{
+        clearInterval(intervalCheckTimeout);
+        intervalCheckTimeout = setInterval(checkClientDisconnect, 400);
+
+        if(isTcpInitDone){
+          let obj = JSON.parse(msg);
+          let temp = parseInt(obj.velocity);
+          if(((temp >= 40)&&(temp <= 60))||(temp < 0)||(temp > 100)){
+            //console.log('Stop');
+            vx = 0;
+            w = 0;
+          }
+          else{
+            if(temp > 60){
+              vx = (((temp - 60)*0.2)/40);
+            }
+            else{
+              vx = (((temp - 40)*0.2)/40);
+            }
+            //console.log('vx: ' + vx);
+            
+            //console.log('obj.beta: ' + obj.beta);
+            w = ((parseInt(obj.beta) - 900)*0.15)/400;
+            //console.log('vy: ' + vy);
+          }
+        }
+      }
+    }
+  });
+});
+
+function checkClientDisconnect(){
+  isDisconnectClient = true;
+}
+
+var waitingReceived = false;
+function SendDataControlToAgv(){
+  if(waitingReceived) return;
+  waitingReceived = true;
+
+  if(isDisconnectClient){
+    let arrSend = [0x5A,0x01,0x00,0x02,0x00,0x00,0x00,0x34,0x07,0xDA,0x07,0xDA,0x00,0x00,0xF0,0x3F,0x7B,0x20,0x22,0x76,0x78,0x22,0x20,0x3A,0x20,0x30,0x2E,0x30,0x30,0x30,0x30,0x30,0x30,0x2C,0x20,0x22,0x76,0x79,0x22,0x20,0x3A,0x20,0x30,0x2E,0x30,0x30,0x30,0x30,0x30,0x30,0x2C,0x20,0x22,0x77,0x22,0x20,0x3A,0x20,0x30,0x2E,0x30,0x30,0x30,0x30,0x30,0x30,0x20,0x7D];
+    //console.log(arrSend);
+    let hexArrSend = new Uint8Array(arrSend);
+    //console.log(hexArrSend);
+    client.write(hexArrSend);
+  }
+  else{
+
+    const format = (num, decimals) => num.toLocaleString('en-US', {
+      minimumFractionDigits: 6,      
+      maximumFractionDigits: 6,
+    });
+
+    let jsonSend = '';// '{ "vx" : ' + vx.toFixed(6).toString() + ', "vy" : ' + vy.toFixed(6).toString() + ', "w" : 0.000000 }';
+    if(vx >= 0){
+      jsonSend = '{ "vx" : ' + format(vx).toString() + ', "vy" : 0.000000, "w" :';
+    }
+    else{
+      jsonSend = '{ "vx" :' + format(vx).toString() + ', "vy" : 0.000000, "w" :';
+    }
+    
+    //console.log('w: ' + w);
+    //console.log('w: ' + format(w));
+    w += 0.000001;
+    if(w >= 0){
+      jsonSend += (' ' + format(w) + ' }');
+    }
+    else{
+      jsonSend += (+ format(w) + ' }');
+    }
+
+    //console.log('jsonSend: ' + jsonSend);
+    let arrSend = [0x5A,0x01,0x00,0x02,0x00,0x00,0x00,0x34,0x07,0xDA,0x07,0xDA,0x00,0x00,0xF0,0x3F];
+    
+    arrSend = arrSend.concat(jsonSend.split ('').map (function (c) { return c.charCodeAt (0); }));
+    
+    //console.log(arrSend);
+    let hexArrSend = new Uint8Array(arrSend);
+    //console.log(hexArrSend);
+    client.write(hexArrSend);
+    
+  }
+}
+
+var counter = 0;
+function sendtest(){
+  counter++;
+  
+}
+//setTimeout(sendtest, 2000);
+
+var client = new net.Socket();
+var dataSend = null;
+client.connect(19205, '192.168.0.146', function() {
+	console.log('Tcp connected..');
+  isTcpInitDone = true;
+	//client.write('Hello, server! Love, Client.');
+  //  let datSend = [0x5A,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x04,0x4C,0x04,0x4C,0x00,0x00,0x00,0x00];
+  //  let hexVal = new Uint8Array(datSend);
+  //  client.write(hexVal);
+
+  //  a = '{ "vx" :  0.020000, "vy"  : 0.000000, "w"  : 0.000000 }'
+  setInterval(SendDataControlToAgv, 300);
+});
+
+client.on('data', function(data) {
+	console.log('Received: ' + data);
+  waitingReceived = false;
+});
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+ 
